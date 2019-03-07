@@ -40,10 +40,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_agreenmentType">Agreenment Type</label>
-                    <select class="form-control" id="field_agreenmentType" name="agreenmentType" [(ngModel)]="agreement.agreenmentType" >
+                    <label class="form-control-label" for="field_agreementType">agreement Type</label>
+                    <select class="form-control" id="field_agreementType" name="agreementType" [(ngModel)]="agreement.agreementType" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="agreementTypeOption.id === agreement.agreenmentType?.id ? agreement.agreenmentType : agreementTypeOption" *ngFor="let agreementTypeOption of agreementtypes; trackBy: trackAgreementTypeById">{{agreementTypeOption.agreementTypeName}}</option>
+                        <option [ngValue]="agreementTypeOption.id === agreement.agreementType?.id ? agreement.agreementType : agreementTypeOption" *ngFor="let agreementTypeOption of agreementtypes; trackBy: trackAgreementTypeById">{{agreementTypeOption.agreementTypeName}}</option>
                     </select>
                 </div>
             </div>

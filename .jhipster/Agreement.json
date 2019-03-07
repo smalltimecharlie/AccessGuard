@@ -27,7 +27,7 @@
             "relationshipType": "many-to-one",
             "otherEntityName": "agreementType",
             "otherEntityRelationshipName": "agreement",
-            "relationshipName": "agreenmentType",
+            "relationshipName": "agreementType",
             "otherEntityField": "agreementTypeName"
         }
     ],

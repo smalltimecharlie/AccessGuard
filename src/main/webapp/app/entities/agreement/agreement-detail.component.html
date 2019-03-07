@@ -25,10 +25,10 @@
                 <dd>
                     <span>{{agreement.source}}</span>
                 </dd>
-                <dt><span>Agreenment Type</span></dt>
+                <dt><span>agreement Type</span></dt>
                 <dd>
-                    <div *ngIf="agreement.agreenmentType">
-                        <a [routerLink]="['/agreement-type', agreement.agreenmentType?.id, 'view']">{{agreement.agreenmentType?.agreementTypeName}}</a>
+                    <div *ngIf="agreement.agreementType">
+                        <a [routerLink]="['/agreement-type', agreement.agreementType?.id, 'view']">{{agreement.agreementType?.agreementTypeName}}</a>
                     </div>
                 </dd>
             </dl>

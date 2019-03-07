@@ -65,7 +65,7 @@ entity EndpointType{
 
 
 relationship ManyToOne {
-    Agreement{agreenmentType(agreementTypeName)} to AgreementType,
+    Agreement{agreementType(agreementTypeName)} to AgreementType,
     OrganisationEndpoint{agreementOrganisation(organisation)} to AgreementOrganisation,
     AgreementOrganisation{agreement(agreementName)} to Agreement,
     NightingaleUser{agreementOrganisation(organisation)} to AgreementOrganisation

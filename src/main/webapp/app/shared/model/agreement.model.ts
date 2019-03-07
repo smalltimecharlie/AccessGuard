@@ -8,7 +8,7 @@ export interface IAgreement {
     agreementEndDate?: Moment;
     sourceId?: string;
     source?: string;
-    agreenmentType?: IAgreementType;
+    agreementType?: IAgreementType;
 }
 
 export class Agreement implements IAgreement {
@@ -19,6 +19,6 @@ export class Agreement implements IAgreement {
         public agreementEndDate?: Moment,
         public sourceId?: string,
         public source?: string,
-        public agreenmentType?: IAgreementType
+        public agreementType?: IAgreementType
     ) {}
 }

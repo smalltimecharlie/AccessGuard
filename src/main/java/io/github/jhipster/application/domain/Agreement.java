@@ -42,7 +42,7 @@ public class Agreement implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("agreements")
-    private AgreementType agreenmentType;
+    private AgreementType agreementType;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -118,17 +118,17 @@ public class Agreement implements Serializable {
         this.source = source;
     }
 
-    public AgreementType getAgreenmentType() {
-        return agreenmentType;
+    public AgreementType getagreementType() {
+        return agreementType;
     }
 
-    public Agreement agreenmentType(AgreementType agreementType) {
-        this.agreenmentType = agreementType;
+    public Agreement agreementType(AgreementType agreementType) {
+        this.agreementType = agreementType;
         return this;
     }
 
-    public void setAgreenmentType(AgreementType agreementType) {
-        this.agreenmentType = agreementType;
+    public void setagreementType(AgreementType agreementType) {
+        this.agreementType = agreementType;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

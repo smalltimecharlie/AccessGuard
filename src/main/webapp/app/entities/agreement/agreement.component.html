@@ -20,7 +20,7 @@
             <th><span>Agreement End Date</span></th>
             <th><span>Source Id</span></th>
             <th><span>Source</span></th>
-            <th><span>Agreenment Type</span></th>
+            <th><span>agreement Type</span></th>
             <th></th>
             </tr>
             </thead>
@@ -33,8 +33,8 @@
                 <td>{{agreement.sourceId}}</td>
                 <td>{{agreement.source}}</td>
                 <td>
-                    <div *ngIf="agreement.agreenmentType">
-                        <a [routerLink]="['../agreement-type', agreement.agreenmentType?.id, 'view' ]" >{{agreement.agreenmentType?.agreementTypeName}}</a>
+                    <div *ngIf="agreement.agreementType">
+                        <a [routerLink]="['../agreement-type', agreement.agreementType?.id, 'view' ]" >{{agreement.agreementType?.agreementTypeName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
