@@ -38,11 +38,11 @@ public class OrganisationEndpoint implements Serializable {
     private Boolean active;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = false)
     private LocationType locationType;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = false)
     private EndpointType endpointType;
 
     @ManyToOne
