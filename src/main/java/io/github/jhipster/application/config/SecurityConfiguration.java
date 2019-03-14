@@ -125,9 +125,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.ldapAuthentication()
-        	.userSearchBase("dc=example,dc=org") //don't add the base
-        	.userSearchFilter("(uid={0})")
-        	.contextSource(getContextSource());
+    	.contextSource(getContextSource());
     }
     
   //Added by Charlie according to https://www.jhipster.tech/tips/016_tip_ldap_authentication.html
