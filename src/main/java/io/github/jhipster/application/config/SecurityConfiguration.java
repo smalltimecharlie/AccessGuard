@@ -125,6 +125,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.ldapAuthentication()
+        .userSearchBase("") //don't add the base
+    	.userSearchFilter("(uid={0})")
+    	.groupSearchBase("") //don't add the base
+    	.groupSearchFilter("member={0}")
     	.contextSource(getContextSource());
     }
     
