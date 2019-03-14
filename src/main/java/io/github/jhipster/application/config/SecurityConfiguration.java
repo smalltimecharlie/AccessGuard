@@ -134,7 +134,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public LdapContextSource getContextSource() {
     	  LdapContextSource contextSource = new LdapContextSource();
-        contextSource.setUrl("ldap://localhost:389");
+        contextSource.setUrl("ldap://127.0.0.1:389");
         contextSource.setBase("dc=example,dc=org");
         contextSource.setUserDn("cn=admin,dc=example,dc=org");
         contextSource.setPassword("admin");
