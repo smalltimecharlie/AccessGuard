@@ -125,10 +125,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.ldapAuthentication()
-        	.userSearchBase("o=myO,ou=myOu") //don't add the base
+        	.userSearchBase("dc=example,dc=org") //don't add the base
         	.userSearchFilter("(uid={0})")
-        	.groupSearchBase("ou=Groups") //don't add the base
-        	.groupSearchFilter("member={0}")
         	.contextSource(getContextSource());
     }
     
@@ -136,10 +134,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public LdapContextSource getContextSource() {
     	  LdapContextSource contextSource = new LdapContextSource();
-        contextSource.setUrl("ldap://[IP goes here]:[port goes here]");
-        contextSource.setBase("dc=mycompany,dc=com");
-        contextSource.setUserDn("cn=aUserUid,dc=mycompany,dc=com");
-        contextSource.setPassword("hisPassword");
+        contextSource.setUrl("ldap://localhost:389");
+        contextSource.setBase("dc=example,dc=org");
+        contextSource.setUserDn("cn=admin,dc=example,dc=org");
+        contextSource.setPassword("admin");
         contextSource.afterPropertiesSet(); //needed otherwise you will have a NullPointerException in spring
 
         return contextSource;
