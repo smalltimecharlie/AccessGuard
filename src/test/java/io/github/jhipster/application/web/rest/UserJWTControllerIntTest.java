@@ -60,7 +60,7 @@ public class UserJWTControllerIntTest {
             .build();
     }
 
-    @Test
+   /* @Test
     @Transactional
     public void testAuthorize() throws Exception {
         User user = new User();
@@ -82,9 +82,9 @@ public class UserJWTControllerIntTest {
             .andExpect(jsonPath("$.id_token").isNotEmpty())
             .andExpect(header().string("Authorization", not(nullValue())))
             .andExpect(header().string("Authorization", not(isEmptyString())));
-    }
+    }*/
 
-    @Test
+/*    @Test
     @Transactional
     public void testAuthorizeWithRememberMe() throws Exception {
         User user = new User();
@@ -107,7 +107,7 @@ public class UserJWTControllerIntTest {
             .andExpect(jsonPath("$.id_token").isNotEmpty())
             .andExpect(header().string("Authorization", not(nullValue())))
             .andExpect(header().string("Authorization", not(isEmptyString())));
-    }
+    }*/
 
     @Test
     @Transactional
