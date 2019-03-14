@@ -4,10 +4,13 @@ import io.github.jhipster.application.security.*;
 import io.github.jhipster.application.security.jwt.*;
 
 import org.springframework.beans.factory.BeanInitializationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.http.HttpMethod;
+import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -116,5 +119,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private JWTConfigurer securityConfigurerAdapter() {
         return new JWTConfigurer(tokenProvider);
+    }
+    
+    //Added by Charlie according to https://www.jhipster.tech/tips/016_tip_ldap_authentication.html
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.ldapAuthentication()
+        	.userSearchBase("o=myO,ou=myOu") //don't add the base
+        	.userSearchFilter("(uid={0})")
+        	.groupSearchBase("ou=Groups") //don't add the base
+        	.groupSearchFilter("member={0}")
+        	.contextSource(getContextSource());
+    }
+    
+  //Added by Charlie according to https://www.jhipster.tech/tips/016_tip_ldap_authentication.html
+    @Bean
+    public LdapContextSource getContextSource() {
+    	  LdapContextSource contextSource = new LdapContextSource();
+        contextSource.setUrl("ldap://[IP goes here]:[port goes here]");
+        contextSource.setBase("dc=mycompany,dc=com");
+        contextSource.setUserDn("cn=aUserUid,dc=mycompany,dc=com");
+        contextSource.setPassword("hisPassword");
+        contextSource.afterPropertiesSet(); //needed otherwise you will have a NullPointerException in spring
+
+        return contextSource;
     }
 }
