@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.DirContextAdapter;
 import org.springframework.ldap.core.DirContextOperations;
 import org.springframework.ldap.core.support.LdapContextSource;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,12 +29,13 @@ import io.github.jhipster.application.domain.Authority;
 import io.github.jhipster.application.domain.User;
 import io.github.jhipster.application.repository.UserRepository;
 
+
 /**
  * @author chorrell
  *
  */
 @Component
-public class CustomAuthenticationManager {
+public class CustomAuthenticationManager implements AuthenticationManager {
 
 	LdapAuthenticationProvider provider = null;
 
@@ -49,6 +51,7 @@ public class CustomAuthenticationManager {
         this.ldapContextSource = ldapContextSource;
     }
 
+    @Override
     public Authentication authenticate(Authentication authentication) {
         log.error("AUTHENTICATION Login" + authentication.getName());
         log.error("AUTHENTICATION Password" + authentication.getCredentials().toString());
