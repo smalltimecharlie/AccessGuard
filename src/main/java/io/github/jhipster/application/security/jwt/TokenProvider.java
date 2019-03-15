@@ -64,6 +64,9 @@ public class TokenProvider {
         String authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
+        
+        //Charlie Add user role
+        authorities = authorities+","+"ROLE_USER";
 
         long now = (new Date()).getTime();
         Date validity;
@@ -91,7 +94,9 @@ public class TokenProvider {
             Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-
+        
+    
+        
         User principal = new User(claims.getSubject(), "", authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
