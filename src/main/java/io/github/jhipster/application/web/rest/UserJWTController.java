@@ -1,5 +1,6 @@
 package io.github.jhipster.application.web.rest;
 
+import io.github.jhipster.application.security.CustomAuthenticationManager;
 import io.github.jhipster.application.security.jwt.JWTFilter;
 import io.github.jhipster.application.security.jwt.TokenProvider;
 import io.github.jhipster.application.web.rest.vm.LoginVM;
@@ -26,9 +27,9 @@ public class UserJWTController {
 
     private final TokenProvider tokenProvider;
 
-    private final AuthenticationManager authenticationManager;
+    private final CustomAuthenticationManager authenticationManager;
 
-    public UserJWTController(TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
+    public UserJWTController(TokenProvider tokenProvider, CustomAuthenticationManager authenticationManager) {
         this.tokenProvider = tokenProvider;
         this.authenticationManager = authenticationManager;
     }
