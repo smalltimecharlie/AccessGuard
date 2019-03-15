@@ -3,6 +3,7 @@ package io.github.jhipster.application.web.rest;
 import io.github.jhipster.application.AccessGuardApp;
 import io.github.jhipster.application.domain.User;
 import io.github.jhipster.application.repository.UserRepository;
+import io.github.jhipster.application.security.CustomAuthenticationManager;
 import io.github.jhipster.application.security.jwt.TokenProvider;
 import io.github.jhipster.application.web.rest.errors.ExceptionTranslator;
 import io.github.jhipster.application.web.rest.vm.LoginVM;
@@ -39,7 +40,7 @@ public class UserJWTControllerIntTest {
     private TokenProvider tokenProvider;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private CustomAuthenticationManager authenticationManager;
 
     @Autowired
     private UserRepository userRepository;
