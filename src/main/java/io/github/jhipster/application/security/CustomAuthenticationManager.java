@@ -50,8 +50,8 @@ public class CustomAuthenticationManager {
     }
 
     public Authentication authenticate(Authentication authentication) {
-        log.debug("AUTHENTICATION Login" + authentication.getName());
-        log.debug("AUTHENTICATION Password" + authentication.getCredentials().toString());
+        log.info("AUTHENTICATION Login" + authentication.getName());
+        log.info("AUTHENTICATION Password" + authentication.getCredentials().toString());
 
         BindAuthenticator bindAuth = new BindAuthenticator(ldapContextSource);
         FilterBasedLdapUserSearch userSearch = new FilterBasedLdapUserSearch(
@@ -77,9 +77,10 @@ public class CustomAuthenticationManager {
                 userAuthorities.add(userAuthority);
                 Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
                 for(Authority a: userAuthorities){
-                    GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(
+                	GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(
                             a.getName());
-                    grantedAuthorities.add(grantedAuthority);
+                grantedAuthorities.add(grantedAuthority);
+                log.info("added authority "+grantedAuthority.getAuthority());
                 }
                   return new org.springframework.security.core.userdetails.User(
                     username, "1" , grantedAuthorities);    
