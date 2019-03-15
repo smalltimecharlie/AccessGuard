@@ -24,7 +24,6 @@ import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
 import org.springframework.security.ldap.userdetails.UserDetailsContextMapper;
 import org.springframework.stereotype.Component;
 
-
 import io.github.jhipster.application.domain.Authority;
 import io.github.jhipster.application.domain.User;
 import io.github.jhipster.application.repository.UserRepository;
@@ -62,7 +61,7 @@ public class CustomAuthenticationManager {
             bindAuth.setUserSearch(userSearch);
             bindAuth.afterPropertiesSet();
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(CustomAuthenticationManager.class.getName()).log(null);
+            java.util.logging.Logger.getLogger(CustomAuthenticationManager.class.getName()).log(null, ex.toString());
         }
         provider = new LdapAuthenticationProvider(bindAuth);
         provider.setUserDetailsContextMapper(new UserDetailsContextMapper() {
@@ -71,6 +70,11 @@ public class CustomAuthenticationManager {
                 Optional<User> isUser = userRepository.findOneWithAuthoritiesByLogin(username);
                 final User user = isUser.get();
                 Set<Authority> userAuthorities = user.getAuthorities();
+                
+                //Add user authority for LDAP users
+                Authority userAuthority = new Authority();
+                userAuthority.setName(AuthoritiesConstants.USER);
+                userAuthorities.add(userAuthority);
                 Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
                 for(Authority a: userAuthorities){
                     GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(
