@@ -89,9 +89,11 @@ public class TokenProvider {
             .setSigningKey(key)
             .parseClaimsJws(token)
             .getBody();
+        
+        String claimsString = claims.get(AUTHORITIES_KEY).toString() + "," + "ROLE_USER";
 
         Collection<? extends GrantedAuthority> authorities =
-            Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+            Arrays.stream(claimsString.split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
         
