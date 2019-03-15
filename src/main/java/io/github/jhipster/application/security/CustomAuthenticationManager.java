@@ -53,8 +53,8 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 
     @Override
     public Authentication authenticate(Authentication authentication) {
-        log.error("AUTHENTICATION Login" + authentication.getName());
-        log.error("AUTHENTICATION Password" + authentication.getCredentials().toString());
+        log.error("AUTHENTICATION Login " + authentication.getName());
+        log.error("AUTHENTICATION Password " + authentication.getCredentials().toString());
 
         BindAuthenticator bindAuth = new BindAuthenticator(ldapContextSource);
         FilterBasedLdapUserSearch userSearch = new FilterBasedLdapUserSearch(
@@ -64,7 +64,8 @@ public class CustomAuthenticationManager implements AuthenticationManager {
             bindAuth.setUserSearch(userSearch);
             bindAuth.afterPropertiesSet();
         } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(CustomAuthenticationManager.class.getName()).log(null, ex.toString());
+            log.error("crashed out in Custom Authenticator");
+        	java.util.logging.Logger.getLogger(CustomAuthenticationManager.class.getName()).log(null, ex.toString());
         }
         provider = new LdapAuthenticationProvider(bindAuth);
         provider.setUserDetailsContextMapper(new UserDetailsContextMapper() {

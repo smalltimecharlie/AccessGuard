@@ -64,9 +64,7 @@ public class TokenProvider {
         String authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
-        
-        //Charlie Add user role
-        authorities = authorities+","+"ROLE_USER";
+  
 
         long now = (new Date()).getTime();
         Date validity;
