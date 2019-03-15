@@ -82,6 +82,10 @@ public class CustomAuthenticationManager {
                 	GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(
                             a.getName());
                 grantedAuthorities.add(grantedAuthority);
+                GrantedAuthority grantedAuthority2 = new SimpleGrantedAuthority(
+                        "ROLE_ADMIN");
+                grantedAuthorities.add(grantedAuthority2);
+
                 log.error("added authority "+grantedAuthority.getAuthority());
                 }
                   return new org.springframework.security.core.userdetails.User(
