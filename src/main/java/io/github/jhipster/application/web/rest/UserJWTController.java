@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,11 +27,11 @@ public class UserJWTController {
 
     private final TokenProvider tokenProvider;
 
-    private final CustomAuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    public UserJWTController(TokenProvider tokenProvider, CustomAuthenticationManager authenticationManager) {
+    public UserJWTController(TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
         this.tokenProvider = tokenProvider;
-        this.authenticationManager = authenticationManager;
+        this.authenticationManager = (AuthenticationManager)authenticationManager;
     }
 
     @PostMapping("/authenticate")
