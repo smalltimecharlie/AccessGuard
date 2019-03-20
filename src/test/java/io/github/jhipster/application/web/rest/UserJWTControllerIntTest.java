@@ -1,31 +1,27 @@
 package io.github.jhipster.application.web.rest;
 
-import io.github.jhipster.application.AccessGuardApp;
-import io.github.jhipster.application.domain.User;
-import io.github.jhipster.application.repository.UserRepository;
-import io.github.jhipster.application.security.CustomAuthenticationManager;
-import io.github.jhipster.application.security.jwt.TokenProvider;
-import io.github.jhipster.application.web.rest.errors.ExceptionTranslator;
-import io.github.jhipster.application.web.rest.vm.LoginVM;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.Matchers.isEmptyString;
-import static org.hamcrest.Matchers.not;
+import io.github.jhipster.application.AccessGuardApp;
+import io.github.jhipster.application.repository.UserRepository;
+import io.github.jhipster.application.security.CustomAuthenticationManager;
+import io.github.jhipster.application.security.jwt.TokenProvider;
+import io.github.jhipster.application.web.rest.errors.ExceptionTranslator;
+import io.github.jhipster.application.web.rest.vm.LoginVM;
 
 /**
  * Test class for the UserJWTController REST controller.
