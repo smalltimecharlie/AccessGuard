@@ -36,6 +36,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
+    private final CustomAuthenticationManager customAuthenticationManager;
+    
     private final UserDetailsService userDetailsService;
 
     private final TokenProvider tokenProvider;
@@ -44,12 +46,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService, TokenProvider tokenProvider, CorsFilter corsFilter, SecurityProblemSupport problemSupport) {
+    public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService, TokenProvider tokenProvider, CorsFilter corsFilter, SecurityProblemSupport problemSupport, CustomAuthenticationManager customAuthenticationManager) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDetailsService = userDetailsService;
         this.tokenProvider = tokenProvider;
         this.corsFilter = corsFilter;
         this.problemSupport = problemSupport;
+        this.customAuthenticationManager = customAuthenticationManager;
     }
 
     @PostConstruct
@@ -63,10 +66,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
     }
 
+    @Bean(name="CustomAuthenticationManager")
     @Override
-    @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+        return this.customAuthenticationManager;
     }
 
     @Bean
