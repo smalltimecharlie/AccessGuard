@@ -72,7 +72,8 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         provider.setUserDetailsContextMapper(new UserDetailsContextMapper() {
             @Override
             public UserDetails mapUserFromContext(DirContextOperations ctx, String username, Collection<? extends GrantedAuthority> clctn) {
-                Optional<User> isUser = userRepository.findOneWithAuthoritiesByLogin(username);
+            	log.error("Starting mapUserFromContext");
+            	Optional<User> isUser = userRepository.findOneWithAuthoritiesByLogin(username);
                 log.error("Optional user logging: "+isUser.toString());
                 
                 final User user = isUser.get();
