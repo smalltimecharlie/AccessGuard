@@ -68,12 +68,16 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         	java.util.logging.Logger.getLogger(CustomAuthenticationManager.class.getName()).log(null, ex.toString());
         }
         provider = new LdapAuthenticationProvider(bindAuth);
+        log.error("added provider "+ provider.toString());
         provider.setUserDetailsContextMapper(new UserDetailsContextMapper() {
             @Override
             public UserDetails mapUserFromContext(DirContextOperations ctx, String username, Collection<? extends GrantedAuthority> clctn) {
                 Optional<User> isUser = userRepository.findOneWithAuthoritiesByLogin(username);
+                log.error("Optional user logging: "+isUser.toString());
+                
                 final User user = isUser.get();
                 Set<Authority> userAuthorities = user.getAuthorities();
+                log.error("user "+user.toString()+" has authorities: "+userAuthorities.toString());
                 
                 //Add user authority for LDAP users
                 Authority userAuthority = new Authority();
