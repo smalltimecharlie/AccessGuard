@@ -64,7 +64,6 @@ public class TokenProvider {
         String authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
-  
 
         long now = (new Date()).getTime();
         Date validity;
@@ -87,16 +86,20 @@ public class TokenProvider {
             .setSigningKey(key)
             .parseClaimsJws(token)
             .getBody();
-        
-        String claimsString = claims.get(AUTHORITIES_KEY).toString() + "," + "ROLE_USER";
 
-        Collection<? extends GrantedAuthority> authorities =
-            Arrays.stream(claimsString.split(","))
+        if (claims.get(AUTHORITIES_KEY).toString().equals(null) || claims.get(AUTHORITIES_KEY).toString().equals("")) {
+        	claims.put(AUTHORITIES_KEY, "ROLE_USER");
+        };
+
+	Collection<SimpleGrantedAuthority> authorities =
+            Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-        
-    
-        
+        log.warn("Authorities: "+claims.get(AUTHORITIES_KEY).toString());
+	SimpleGrantedAuthority userAuthority = new SimpleGrantedAuthority("ROLE_USER");
+
+        authorities.add(userAuthority);
+log.warn("Authorities after adding user: "+claims.get(AUTHORITIES_KEY).toString());
         User principal = new User(claims.getSubject(), "", authorities);
 
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);

@@ -36,8 +36,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    private final CustomAuthenticationManager customAuthenticationManager;
-    
     private final UserDetailsService userDetailsService;
 
     private final TokenProvider tokenProvider;
@@ -46,13 +44,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService, TokenProvider tokenProvider, CorsFilter corsFilter, SecurityProblemSupport problemSupport, CustomAuthenticationManager customAuthenticationManager) {
+    public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService, TokenProvider tokenProvider, CorsFilter corsFilter, SecurityProblemSupport problemSupport) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDetailsService = userDetailsService;
         this.tokenProvider = tokenProvider;
         this.corsFilter = corsFilter;
         this.problemSupport = problemSupport;
-        this.customAuthenticationManager = customAuthenticationManager;
     }
 
     @PostConstruct
@@ -66,10 +63,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
     }
 
-    @Bean(name="CustomAuthenticationManager")
     @Override
+    @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        return this.customAuthenticationManager;
+        return super.authenticationManagerBean();
     }
 
     @Bean
@@ -106,15 +103,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
-            .antMatchers("/api/register").permitAll()
-            .antMatchers("/api/activate").permitAll()
-            .antMatchers("/api/authenticate").permitAll()
-            .antMatchers("/api/account/reset-password/init").permitAll()
-            .antMatchers("/api/account/reset-password/finish").permitAll()
-            .antMatchers("/api/**").authenticated()
-            .antMatchers("/management/health").permitAll()
-            .antMatchers("/management/info").permitAll()
-            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+	    //.anyRequest().fullyAuthenticated().and().formLogin()		
+            //.antMatchers("/api/register").permitAll()
+            //.antMatchers("/api/activate").permitAll()
+            //.antMatchers("/api/authenticate").permitAll()
+            //.antMatchers("/api/account/reset-password/init").permitAll()
+            //.antMatchers("/api/account/reset-password/finish").permitAll()
+            //.antMatchers("/api/**").authenticated()
+            //.antMatchers("/management/health").permitAll()
+            //.antMatchers("/management/info").permitAll()
+            //.antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+	      .antMatchers("/**").permitAll()
         .and()
             .apply(securityConfigurerAdapter());
 
